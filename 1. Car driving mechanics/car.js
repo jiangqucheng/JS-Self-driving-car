@@ -1,5 +1,5 @@
 class Car{
-    constructor(x,y,width,height){
+    constructor(x, y, width, height){
         this.x=x;
         this.y=y;
         this.width=width;
@@ -33,10 +33,10 @@ class Car{
             this.speed=-this.maxSpeed/2;
         }
 
-        if(this.speed>0){
+        if(this.speed>0 && this.controls.forward!=true){
             this.speed-=this.friction;
         }
-        if(this.speed<0){
+        if(this.speed<0 && this.controls.reverse!=true){
             this.speed+=this.friction;
         }
         if(Math.abs(this.speed)<this.friction){
@@ -44,12 +44,12 @@ class Car{
         }
 
         if(this.speed!=0){
-            const flip=this.speed>0?1:-1;
+            const speed_div=this.speed/this.maxSpeed;
             if(this.controls.left){
-                this.angle+=0.03*flip;
+                this.angle+=0.03*speed_div;
             }
             if(this.controls.right){
-                this.angle-=0.03*flip;
+                this.angle-=0.03*speed_div;
             }
         }
 
@@ -70,6 +70,12 @@ class Car{
             this.height
         );
         ctx.fill();
+
+        ctx.beginPath();
+        ctx.lineWidth="3";
+        ctx.strokeStyle="grey";
+        ctx.arc(0,0,5, (-90-135)/180*Math.PI, (-90+135)/180*Math.PI);
+        ctx.stroke();
 
         ctx.restore();
     }

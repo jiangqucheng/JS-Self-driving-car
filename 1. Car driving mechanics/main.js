@@ -8,7 +8,7 @@ animate();
 
 function animate(){
     car.update();
-    
+    // this is for update canvas, otherwize the old illusion will not be clear
     canvas.height=window.innerHeight;
     car.draw(ctx);
     requestAnimationFrame(animate);

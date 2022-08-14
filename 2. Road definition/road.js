@@ -5,8 +5,8 @@ class Road{
 
         this.laneSeparatorColor = roadParamDict.laneSeparatorColor;
         this.laneSeparatorWidth = roadParamDict.laneSeparatorWidth;
-        this.roadBoarderColor = roadParamDict.roadBoarderColor;
-        this.roadBoarderWidth = roadParamDict.roadBoarderWidth;
+        this.roadBorderColor = roadParamDict.roadBorderColor;
+        this.roadBorderWidth = roadParamDict.roadBorderWidth;
 
         const infinity=roadParamDict.infinity;  // fake infinity
         this.left = center_x-width/2;
@@ -20,8 +20,8 @@ class Road{
         const bottomLeft={x:this.left,y:this.bottom};
         const bottomRight={x:this.right,y:this.bottom};
         this.borders=[
-            [topLeft,bottomLeft],
-            [topRight,bottomRight]
+            [topLeft,bottomLeft],  // left road border
+            [topRight,bottomRight]  // right road border
         ];
     }
 
@@ -50,8 +50,8 @@ class Road{
             ctx.stroke();
         }
 
-        ctx.lineWidth=this.roadBoarderWidth;
-        ctx.strokeStyle=this.roadBoarderColor;
+        ctx.lineWidth=this.roadBorderWidth;
+        ctx.strokeStyle=this.roadBorderColor;
 
         ctx.setLineDash([]);
         this.borders.forEach(border=>{

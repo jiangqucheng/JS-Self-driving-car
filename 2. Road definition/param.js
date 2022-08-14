@@ -14,8 +14,8 @@ const SYS_PARAM = {
         laneCount:4,
         laneSeparatorColor:"#FFF",
         laneSeparatorWidth:5,
-        roadBoarderColor:"#FFB432", 
-        roadBoarderWidth:8,
+        roadBorderColor:"#FFB432", 
+        roadBorderWidth:8,
     },
     canvas:
     {

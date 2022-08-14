@@ -1,16 +1,20 @@
 class Road{
-    constructor(x,width,laneCount=3){
-        this.x=x;
-        this.width=width;
-        this.laneCount=laneCount;
+    constructor(center_x, width, roadParamDict){
+        this.width = width;
+        this.laneCount = roadParamDict.laneCount;
 
-        this.left=x-width/2;
-        this.right=x+width/2;
+        this.laneSeparatorColor = roadParamDict.laneSeparatorColor;
+        this.laneSeparatorWidth = roadParamDict.laneSeparatorWidth;
+        this.roadBoarderColor = roadParamDict.roadBoarderColor;
+        this.roadBoarderWidth = roadParamDict.roadBoarderWidth;
 
-        const infinity=1000000;
-        this.top=-infinity;
-        this.bottom=infinity;
+        const infinity=roadParamDict.infinity;  // fake infinity
+        this.left = center_x-width/2;
+        this.right = center_x+width/2;
+        this.top = -infinity;
+        this.bottom = infinity;
 
+        // road border
         const topLeft={x:this.left,y:this.top};
         const topRight={x:this.right,y:this.top};
         const bottomLeft={x:this.left,y:this.bottom};
@@ -28,8 +32,9 @@ class Road{
     }
 
     draw(ctx){
-        ctx.lineWidth=5;
-        ctx.strokeStyle="white";
+
+        ctx.lineWidth=this.laneSeparatorWidth;
+        ctx.strokeStyle=this.laneSeparatorColor;
 
         for(let i=1;i<=this.laneCount-1;i++){
             const x=lerp(
@@ -44,6 +49,9 @@ class Road{
             ctx.lineTo(x,this.bottom);
             ctx.stroke();
         }
+
+        ctx.lineWidth=this.roadBoarderWidth;
+        ctx.strokeStyle=this.roadBoarderColor;
 
         ctx.setLineDash([]);
         this.borders.forEach(border=>{
